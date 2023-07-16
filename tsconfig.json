@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "target": "ESNext",
+        "moduleResolution": "nodenext",
+        "strict": true,
+        "esModuleInterop": true,
+        "declaration": true,
+        "outDir": "build",
+        "rootDirs": [
+            "lib",
+            "tests"
+        ],
+        "types": [
+            "node"
+        ],
+        "paths": {
+            "*": [
+                "lib/*"
+            ]
+        },
+        "baseUrl": ".",
+        "sourceMap": true
+    },
+    "include": [
+        "lib/**/*.ts",
+        "tests/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build"
+    ]
+}
