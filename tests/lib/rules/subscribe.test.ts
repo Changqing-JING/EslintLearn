@@ -42,10 +42,12 @@ suite("test subscribe", () => {
         public subscribe(em: EM){
             nativeFunction(em);
         }
+        public foo(){}
     }
 
 
     const c1 = new C1();
+    c1.foo();
     c1.subscribe(EM.INSTANCE1);
 
     `;
@@ -67,7 +69,7 @@ suite("test subscribe", () => {
       invalid: [
         {
           code: invalidTestCase,
-          errors: [{ messageId: "subscribe", type: AST_NODE_TYPES.Program }],
+          errors: [{ messageId: "subscribe", type: AST_NODE_TYPES.CallExpression }],
           filename: tempFileName,
         },
       ],
