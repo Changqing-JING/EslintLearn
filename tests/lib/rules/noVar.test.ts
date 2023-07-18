@@ -1,25 +1,25 @@
 import { noVarRule } from "../../../lib/rules/noVar.js";
 
-import { RuleTester } from "eslint";
+// eslint-disable-next-line node/no-unpublished-import
+import { RuleTester } from "@typescript-eslint/rule-tester";
 // eslint-disable-next-line node/no-unpublished-import
 import { test, suite } from "mocha";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { createRequire } from "module";
+// eslint-disable-next-line node/no-unpublished-import
+import { AST_NODE_TYPES } from "@typescript-eslint/utils";
 
 const currentFilePath = fileURLToPath(import.meta.url);
 const projectRoot = dirname(dirname(dirname(dirname(dirname(currentFilePath)))));
-const require = createRequire(import.meta.url);
 
-// Resolve the absolute path of @typescript-eslint/parser
-const parserPath = require.resolve("@typescript-eslint/parser");
+RuleTester.afterAll = () => {};
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 suite("test no var lint", () => {
   test("test no var lint", () => {
     const ruleTester = new RuleTester({
-      parser: parserPath,
+      parser: "@typescript-eslint/parser",
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
@@ -39,7 +39,7 @@ suite("test no var lint", () => {
       invalid: [
         {
           code: "var a:number = 1;",
-          errors: [{ message: "not use var", type: "VariableDeclaration" }],
+          errors: [{ messageId: "not-use-var", type: AST_NODE_TYPES.VariableDeclaration }],
           output: "let a:number = 1;",
           filename: tempFileName,
         },

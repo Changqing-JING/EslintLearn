@@ -8,8 +8,7 @@ module.exports = {
     "promise",
     "sonarjs",
     "prettier",
-    "unicorn",
-    "unused-imports"
+    "unicorn"
   ],
   "extends": [
     "prettier",

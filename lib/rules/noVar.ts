@@ -1,40 +1,33 @@
-import { Rule } from "eslint";
-//------------------------------------------------------------------------------
-// Rule Definition
-//------------------------------------------------------------------------------
+// eslint-disable-next-line node/no-unpublished-import
+import { ESLintUtils } from "@typescript-eslint/utils";
+// eslint-disable-next-line node/no-unpublished-import
+import { RuleListener, RuleModule } from "@typescript-eslint/utils/ts-eslint";
 
-export const noVarRule: Rule.RuleModule = {
+const createRule = ESLintUtils.RuleCreator((name) => `https://example.com/rule/${name}`);
+
+// Type: RuleModule<"uppercase", ...>
+export const noVarRule: RuleModule<"not-use-var", string[], RuleListener> = createRule({
+  name: "uppercase-first-declarations",
   meta: {
-    type: "problem", // `problem`, `suggestion`, or `layout`
+    type: "problem",
     docs: {
       description: "not allow to use var",
+      recommended: "strict",
     },
-    fixable: "code", // Or `code` or `whitespace`
-    schema: [], // Add a schema if the rule has options
+    fixable: "code",
+    schema: [],
+    messages: { "not-use-var": "not use var" },
   },
 
   create(context) {
-    context.sourceCode;
-    // variables should be defined here
-
-    //----------------------------------------------------------------------
-    // Helpers
-    //----------------------------------------------------------------------
-
-    // any helper functions should go here or else delete this section
-
-    //----------------------------------------------------------------------
-    // Public
-    //----------------------------------------------------------------------
-
     return {
       VariableDeclaration(node) {
         if (node.kind == "var") {
           context.report({
             node,
-            message: "not use var",
+            messageId: "not-use-var",
             fix(fixer) {
-              const varToken = context.sourceCode.getFirstToken(node, { filter: (t) => t.value === "var" });
+              const varToken = context.getSourceCode().getFirstToken(node, { filter: (t) => t.value === "var" });
               return varToken ? fixer.replaceText(varToken, "let") : null;
             },
           });
@@ -42,4 +35,5 @@ export const noVarRule: Rule.RuleModule = {
       },
     };
   },
-};
+  defaultOptions: ["error"],
+});

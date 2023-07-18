@@ -5,4 +5,10 @@ import { noVarRule } from "./rules/noVar.js";
 //------------------------------------------------------------------------------
 
 // import all rules in lib/rules
-export const rules = [noVarRule];
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const rules: any = {
+  noVar: noVarRule,
+};
+
+export default rules;
