@@ -7,7 +7,7 @@ const createRule = ESLintUtils.RuleCreator((name) => `https://example.com/rule/$
 
 // Type: RuleModule<"uppercase", ...>
 export const noVarRule: RuleModule<"not-use-var", string[], RuleListener> = createRule({
-  name: "uppercase-first-declarations",
+  name: "noVar",
   meta: {
     type: "problem",
     docs: {
@@ -18,6 +18,8 @@ export const noVarRule: RuleModule<"not-use-var", string[], RuleListener> = crea
     schema: [],
     messages: { "not-use-var": "not use var" },
   },
+
+  defaultOptions: ["error"],
 
   create(context) {
     return {
@@ -35,5 +37,4 @@ export const noVarRule: RuleModule<"not-use-var", string[], RuleListener> = crea
       },
     };
   },
-  defaultOptions: ["error"],
 });

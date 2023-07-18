@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.json",
+    "exclude": [
+        "tests/**",
+        "fixture/**",
+        "dist/**",
+        "cli/**"
+    ],
+    "include": [
+        "lib/*"
+    ],
+    "compilerOptions": {
+        "emitDeclarationOnly": true,
+        "declaration": true,
+        "outDir": "dist",
+        "rootDir": "lib"
+    },
+}
