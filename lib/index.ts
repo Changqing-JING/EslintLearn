@@ -1,5 +1,6 @@
 import { noVarRule } from "./rules/noVar.js";
 import { subscribeRule } from "./rules/subscribe.js";
+import { fixImportRule } from "rules/fixImport.js";
 
 //------------------------------------------------------------------------------
 // Plugin Definition
@@ -11,6 +12,7 @@ import { subscribeRule } from "./rules/subscribe.js";
 const rulesExport: any = {
   noVar: noVarRule,
   subscribe: subscribeRule,
+  fixImport: fixImportRule,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
